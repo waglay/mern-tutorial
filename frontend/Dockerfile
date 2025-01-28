@@ -2,9 +2,9 @@ FROM node:lts-alpine AS base
 WORKDIR /app
 
 FROM base AS install
-COPY package*.json .
+COPY package*.json ./
 RUN npm install
-COPY . .
+COPY . ./
 RUN npm run build
 
 FROM nginx:alpine AS frontend
