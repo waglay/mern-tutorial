@@ -145,4 +145,4 @@ services:
       start_period: 30s
 networks:
   frontend_net:
-    driver: bridge
+    driver: overlay
