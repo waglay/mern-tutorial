@@ -135,7 +135,7 @@ services:
         monitor: 15s
         max_failure_ratio: 0.4
     healthcheck:
-      test: ["CMD_SHELL","mongosh"]
+      test: ["CMD-SHELL","mongosh"]
       interval: 10s
       timeout: 10s
       retries: 3
