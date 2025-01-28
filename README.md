@@ -1,4 +1,4 @@
-# Deploying with trying to do the load testing
+# Deploying while trying to do the load testing
 
 First of all, all the services were tested locally using the compose file.
 After success, all the directory along with modification in compose file is added in git.
