@@ -114,12 +114,15 @@ services:
     #   context: ./mongo
     #   dockerfile: Dockerfile
     container_name: mongo
+    # command: --replSet rs0 --smallfiles --oplogSize 128
 #command: ["mongosh", "--username", "${MONGO_INITDB_ROOT_USERNAME}", "--password", "${MONGO_INITDB_ROOT_PASSWORD}"]
     env_file:
       - .env
+    volumes:
+      - mongo_data:/data/db
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 1
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -146,3 +149,5 @@ services:
 networks:
   frontend_net:
     driver: overlay
+volumes:
+  mongo_data:
