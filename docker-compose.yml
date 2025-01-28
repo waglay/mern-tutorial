@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+     - frontend_net  
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - 5000:5000
+    env_file:
+      - .env 
+    depends_on:
+      - mongo  
+  internal:  ## I reckon the service name and the end point name must be same in the endpoints,
+    build:
+      context: ./leaderboard  
+      dockerfile: Dockerfile
+    container_name: internal 
+  mongo:
+    image: mongo
+    # build: 
+    #   context: ./mongo
+    #   dockerfile: Dockerfile
+    container_name: mongo
+#command: ["mongosh", "--username", "${MONGO_INITDB_ROOT_USERNAME}", "--password", "${MONGO_INITDB_ROOT_PASSWORD}"]
+    env_file:
+      - .env
+networks:
+  frontend_net:
+    driver: bridge
