@@ -1,9 +1,10 @@
 version: '3.8'
 services:
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: frontend
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
     container_name: frontend
     ports:
       - "80:80"
@@ -38,9 +39,10 @@ services:
     networks:
      - frontend_net  
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: backend
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
     container_name: backend
     ports:
       - 5000:5000
@@ -75,9 +77,10 @@ services:
       retries: 3
       start_period: 30s   
   internal:  ## I reckon the service name and the end point name must be same in the endpoints,
-    build:
-      context: ./leaderboard  
-      dockerfile: Dockerfile
+    image: internal
+    # build:
+      # context: ./leaderboard  
+      # dockerfile: Dockerfile
     container_name: internal
     deploy:
       mode: replicated
