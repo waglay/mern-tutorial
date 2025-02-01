@@ -3,6 +3,10 @@ type: docker
 name: default
 
 steps:
+- name: send-tags-to-tags-file
+    image: node
+    commands:
+      - echo -n "$(date +'%Y-%m-%d_%H-%M')_${DRONE_COMMIT}, latest" > .tags
 - name: backend
   image: plugins/docker
   settings:
@@ -11,8 +15,8 @@ steps:
     password:
       from_secret: docker_password 
     repo: waglay14/backend
-    tags: 
-      - '${DRONE_BUILD_FINISHED}-${DRONE_COMMIT}'
-      - latest
+    # tags: 
+    #   - '${DRONE_BUILD_FINISHED}-${DRONE_COMMIT}'
+    #   - latest
     dockerfile: ./backend/Dockerfile
     context: ./backend
