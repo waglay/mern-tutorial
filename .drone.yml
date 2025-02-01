@@ -16,7 +16,7 @@ steps:
       from_secret: docker_password 
     repo: waglay14/backend
     tags: 
-      - "$(date +'%Y-%m-%d_%H-%M-%S')_${DRONE_COMMIT}"
+      - "${date +'%Y-%m-%d_%H-%M-%S'}_${DRONE_COMMIT}"
       - latest
     dockerfile: ./backend/Dockerfile
     context: ./backend
