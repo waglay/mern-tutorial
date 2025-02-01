@@ -3,10 +3,10 @@ type: docker
 name: default
 
 steps:
-# - name: send-tags-to-tags-file
-#   image: node
-#   commands:
-#     - echo -n "$(date +'%Y-%m-%d_%H-%M')_${DRONE_COMMIT}, latest" > .tags
+- name: send-tags-to-tags-file
+  image: node
+  commands:
+    - echo -n "$(date +'%Y-%m-%d_%H-%M-%S')_${DRONE_COMMIT}, latest" > .tags
 - name: backend
   image: plugins/docker
   settings:
@@ -15,9 +15,10 @@ steps:
     password:
       from_secret: docker_password 
     repo: waglay14/backend
-    tags: 
-      - "${date +'%Y-%m-%d_%H-%M-%S'}_${DRONE_COMMIT}"
-      - latest
+    # tags: 
+    #   - "${date +'%Y-%m-%d_%H-%M-%S'}_${DRONE_COMMIT}" 
+    #   - latest
+    # this doesnot work as there is no date function as in node.
     dockerfile: ./backend/Dockerfile
     context: ./backend
 - name: frontend
@@ -28,8 +29,5 @@ steps:
     password:
       from_secret: docker_password 
     repo: waglay14/frontend
-    tags: 
-      - "$(date +'%Y-%m-%d_%H-%M-%S')_${DRONE_COMMIT}"
-      - latest
     dockerfile: ./frontend/Dockerfile
     context: ./frontend
