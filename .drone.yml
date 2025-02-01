@@ -13,3 +13,4 @@ steps:
     repo: waglay/backend
     tags: ${DRONE_TAG}
     dockerfile: ./backend/Dockerfile
+    context: ./backend
