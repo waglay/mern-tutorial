@@ -12,7 +12,7 @@ steps:
       from_secret: docker_password 
     repo: waglay14/backend
     tags: 
+      - '${DRONE_BUILD_FINISHED}-${DRONE_COMMIT}'
       - latest
-      - ${DRONE_TAG}
     dockerfile: ./backend/Dockerfile
     context: ./backend
