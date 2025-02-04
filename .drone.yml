@@ -5,11 +5,18 @@ name: staging
 steps:
 - name: send-tags-to-tags-file
   image: nginx:alpine
+  when:
+    branch:
+      - dev
   commands:
     - echo -n "$(date +'%Y-%m-%d_%H-%M-%S')_${DRONE_COMMIT}, latest" > .tags
     
 - name: backend
   image: plugins/docker
+  when:
+    branch:
+      - dev
+      - master
   settings:
     username: 
       from_secret: docker_username
@@ -21,6 +28,10 @@ steps:
     
 - name: frontend
   image: plugins/docker
+  when: 
+    branch:
+      - dev
+      - master
   settings:
     username: 
       from_secret: docker_username
