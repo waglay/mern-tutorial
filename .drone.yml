@@ -38,3 +38,6 @@ steps:
     repo: waglay14/frontend
     dockerfile: ./frontend/Dockerfile
     context: ./frontend
+trigger:
+  branch:
+    - dev
