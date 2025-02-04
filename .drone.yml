@@ -1,14 +1,20 @@
 kind: pipeline
 type: docker
-name: default
+name: mern_stack_test
 
 steps:
 - name: send-tags-to-tags-file
   image: nginx:alpine
+  when:
+    branch:
+      - dev
   commands:
     - echo -n "$(date +'%Y-%m-%d_%H-%M-%S')_${DRONE_COMMIT}, latest" > .tags
     
 - name: backend
+  when:
+    branch:
+      - dev
   image: plugins/docker
   settings:
     username: 
@@ -21,6 +27,9 @@ steps:
     
 - name: frontend
   image: plugins/docker
+  when:
+    branch:
+      - main
   settings:
     username: 
       from_secret: docker_username
