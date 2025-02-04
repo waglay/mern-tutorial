@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: mern_stack
 
 steps:
 - name: send-tags-to-tags-file
