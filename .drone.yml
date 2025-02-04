@@ -15,6 +15,7 @@ steps:
   when:
     branch:
       - dev
+      - main
   image: plugins/docker
   settings:
     username: 
@@ -30,6 +31,7 @@ steps:
   when:
     branch:
       - main
+      - dev
   settings:
     username: 
       from_secret: docker_username
